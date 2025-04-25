@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tanggal Jadian💕</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
   <style>
     * {
       box-sizing: border-box;
@@ -30,17 +30,17 @@
       border-radius: 20px;
       padding: 3rem;
       max-width: 500px;
+      width: 100%;
       text-align: center;
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
     }
 
     h1 {
-      font-size: 1.5rem;
+      font-size: 1.7rem;
       font-weight: 600;
       margin-bottom: 0.5rem;
       color: #d81b60;
       font-family: 'Great Vibes', cursive;
-
     }
 
     h2 {
@@ -112,8 +112,6 @@
 
       h1 {
         font-size: 1.5rem;
-        font-family: 'Great Vibes', cursive;
-
       }
 
       .days-count {
@@ -136,14 +134,27 @@
   <div class="floating-hearts" id="floatingHearts"></div>
 
   <script>
-    // Hitung jumlah hari
     const startDate = new Date("2025-04-05");
-    const today = new Date();
-    const diffTime = today - startDate;
-    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-    document.getElementById("days").textContent = diffDays;
 
-    // Floating hearts
+    function updateDays() {
+      const today = new Date();
+      const diffTime = today - startDate;
+      const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+      document.getElementById("days").textContent = diffDays;
+    }
+
+    updateDays(); // Update saat pertama kali
+
+    // Set agar update otomatis setiap hari jam 00:00
+    const now = new Date();
+    const millisUntilMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1) - now;
+
+    setTimeout(() => {
+      updateDays(); // Update pertama saat 00:00
+      setInterval(updateDays, 24 * 60 * 60 * 1000); // Update setiap 24 jam
+    }, millisUntilMidnight);
+
+    // Hati melayang 💗
     const hearts = document.getElementById('floatingHearts');
     setInterval(() => {
       const heart = document.createElement('div');
